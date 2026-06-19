@@ -28,22 +28,18 @@ namespace IdkL0.SimpleDataSaver
             }
         }
 
-        public void Close()
+        public DataSave End()
         {
             _writer.Flush();
             _stream.Position = 0;
-        }
 
-        public byte[] ToArray()
-        {
-            Close();
-            return _stream.ToArray();
+            Dispose();
+            return new(_stream);
         }
 
         public void Dispose()
         {
             _writer?.Dispose();
-            _stream?.Dispose();
         }
     }
 }
