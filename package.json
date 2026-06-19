@@ -1,0 +1,16 @@
+{
+  "name": "com.idkl0.simpledatasaver",
+  "version": "0.1.0",
+  "displayName": "Simple Data Saver",
+  "description": "S1mple save and load binari data.",
+  "unity": "2022.3",
+  "author": {
+    "name": "IdkL0"
+  },
+  "keywords": [
+    "binary",
+    "save",
+    "load",
+    "data"
+  ]
+}
