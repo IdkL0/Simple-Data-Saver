@@ -25,6 +25,7 @@ namespace IdkL0.SimpleDataSaver
             if (TypeRegistry<T>.IsRegistered)
             {
                 val = TypeRegistry<T>.Read(_reader);
+                if (SimpleDataSaver.Logs) Debug.Log($"Read type: {typeof(T).Name}, value {val}");
             }
             else
             {
@@ -41,6 +42,8 @@ namespace IdkL0.SimpleDataSaver
 
         public void End(bool disposeData = false)
         {
+            if (SimpleDataSaver.Logs) Debug.Log($"End reading with disposeData: {disposeData}");
+
             if (disposeData)
             {
                 _data.Dispose();

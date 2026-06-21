@@ -21,6 +21,7 @@ namespace IdkL0.SimpleDataSaver
             if (TypeRegistry<T>.IsRegistered)
             {
                 TypeRegistry<T>.Write(_writer, value);
+                if (SimpleDataSaver.Logs) Debug.Log($"Write type: {typeof(T).Name}, value {value}");
             }
             else
             {
@@ -30,6 +31,8 @@ namespace IdkL0.SimpleDataSaver
 
         public DataSave End()
         {
+            if (SimpleDataSaver.Logs) Debug.Log("End writing");
+
             _writer.Flush();
             _stream.Position = 0;
 
