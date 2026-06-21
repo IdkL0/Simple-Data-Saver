@@ -24,7 +24,7 @@ namespace IdkL0.SimpleDataSaver
             }
             else
             {
-                Debug.LogError($"[DataSaver] Type: {typeof(T).Name} not registred");
+                Debug.LogError($"[DataWriter] Type: {typeof(T).Name} not registred");
             }
         }
 
