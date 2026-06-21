@@ -21,5 +21,27 @@ namespace IdkL0.SimpleDataSaver
 
             return stream;
         }
+
+        public static DataSave ReadFromStream(Stream stream)
+        {
+            MemoryStream ms = new MemoryStream();
+
+            if (stream.CanRead) stream.CopyTo(ms);
+
+            return new DataSave(ms);
+        }
+
+        public static DataSave ReadFromFile(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                FileStream stream = File.OpenRead(filename);
+
+                return ReadFromStream(stream);
+            }
+
+            MemoryStream ms = new MemoryStream();
+            return new DataSave(ms);
+        }
     }
 }
