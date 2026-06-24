@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IdkL0.SimpleDataSaver
+﻿namespace IdkL0.SimpleDataSaver
 {
     public static class SimpleDataSaver
     {
@@ -11,6 +7,7 @@ namespace IdkL0.SimpleDataSaver
         public static void Init()
         {
             DataRegistries.RegisterDefaults();
+            Additional.AdditionalRegistries.Register();
         }
     }
 }

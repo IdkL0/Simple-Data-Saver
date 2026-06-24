@@ -1,3 +1,14 @@
 {
-	"name": "SimpeDataSaver"
+    "name": "SimpeDataSaver",
+    "rootNamespace": "IdkL0.SimpleDataSaver",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -16,6 +16,14 @@ namespace IdkL0.SimpleDataSaver
             stream.Write(data.GetBytes());
         }
 
+        public static void WriteToStream(Stream stream, KeyDataSave data)
+        {
+            if (!stream.CanWrite) return;
+
+            if (SimpleDataSaver.Logs) Debug.Log($"Write to stream");
+            stream.Write(data.sv.GetBytes());
+        }
+
         public static async Task WriteToStreamAsync(Stream stream, DataSave data, CancellationToken ct = default)
         {
             if (!stream.CanWrite) throw new System.ArgumentException("Stream can't be read");
@@ -25,7 +33,28 @@ namespace IdkL0.SimpleDataSaver
             await stream.WriteAsync(bytes.AsMemory(), ct).ConfigureAwait(false);
         }
 
+        public static async Task WriteToStreamAsync(Stream stream, KeyDataSave data, CancellationToken ct = default)
+        {
+            if (!stream.CanWrite) throw new System.ArgumentException("Stream can't be read");
+
+            if (SimpleDataSaver.Logs) Debug.Log($"Write to stream (Async)");
+            byte[] bytes = data.sv.GetBytes();
+            await stream.WriteAsync(bytes.AsMemory(), ct).ConfigureAwait(false);
+        }
+
         public static FileStream CreateFileSave(string filename, DataSave data)
+        {
+            FileStream stream = File.Create(filename);
+            if (SimpleDataSaver.Logs) Debug.Log($"File created {filename}");
+
+            WriteToStream(stream, data);
+
+            stream.Close();
+
+            return stream;
+        }
+
+        public static FileStream CreateFileSave(string filename, KeyDataSave data)
         {
             FileStream stream = File.Create(filename);
             if (SimpleDataSaver.Logs) Debug.Log($"File created {filename}");
@@ -49,12 +78,25 @@ namespace IdkL0.SimpleDataSaver
             return stream;
         }
 
+        public static async Task<FileStream> CreateFileSaveAsync(string filename, KeyDataSave data, CancellationToken ct = default)
+        {
+            FileStream stream = File.Create(filename);
+            if (SimpleDataSaver.Logs) Debug.Log($"File created {filename} (Async)");
+
+            await WriteToStreamAsync(stream, data, ct).ConfigureAwait(false);
+
+            stream.Close();
+
+            return stream;
+        }
+
         public static DataSave ReadFromStream(Stream stream)
         {
             MemoryStream ms = new MemoryStream();
             if (SimpleDataSaver.Logs) Debug.Log($"Reading stream");
 
             if (stream.CanRead) stream.CopyTo(ms);
+            stream.Position = 0;
 
             return new DataSave(ms);
         }
@@ -65,6 +107,7 @@ namespace IdkL0.SimpleDataSaver
             if (SimpleDataSaver.Logs) Debug.Log($"Reading stream (Async)");
 
             if (stream.CanRead) await stream.CopyToAsync(ms);
+            stream.Position = 0;
 
             return new DataSave(ms);
         }

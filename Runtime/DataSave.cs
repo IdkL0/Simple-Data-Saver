@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace IdkL0.SimpleDataSaver
 {
@@ -9,9 +7,10 @@ namespace IdkL0.SimpleDataSaver
     {
         internal MemoryStream _stream;
 
-        public DataSave(MemoryStream stream)
+        internal DataSave(MemoryStream stream)
         {
             _stream = stream;
+            _stream.Position = 0;
         }
 
         public byte[] GetBytes()

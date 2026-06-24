@@ -7,7 +7,7 @@ namespace IdkL0.SimpleDataSaver
 {
     public class DataWriter : IDisposable
     {
-        private readonly MemoryStream _stream;
+        internal readonly MemoryStream _stream;
         private readonly BinaryWriter _writer;
 
         public DataWriter()

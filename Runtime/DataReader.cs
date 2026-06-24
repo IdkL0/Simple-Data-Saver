@@ -8,7 +8,7 @@ namespace IdkL0.SimpleDataSaver
     public class DataReader : IDisposable
     {
         public DataSave _data;
-        BinaryReader _reader;
+        readonly BinaryReader _reader;
 
         public DataReader(DataSave data)
         {

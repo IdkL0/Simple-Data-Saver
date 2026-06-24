@@ -33,6 +33,7 @@ namespace IdkL0.SimpleDataSaver
             Register<char>((w, v) => w.Write(v), r => r.ReadChar());
 
             Register<string>((w, v) => w.Write(v), r => r.ReadString());
+            Register<string>((w, v) => w.Write(v), r => r.ReadString());
         }
     }
 
